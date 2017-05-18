@@ -8,22 +8,28 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            teams: [],
-            teamCheeses: [],
-            currentTeam: 0,
-        };
+
 
         let team1 = ["Peter", "Charlotte"];
         let team2 = ["Palle", "Jesper"];
-        this.state.teams.push(team1);
-        this.state.teams.push(team2);
-        this.state.teamCheeses.push([]);
-        this.state.teamCheeses.push([]);
+        let newTeams = [];
+        newTeams.push(team1);
+        newTeams.push(team2);
+        let newTeamCheeses = [];
+        newTeamCheeses.push([]);
+        newTeamCheeses.push([]);
         for(let i = 0; i<6; i++) {
-            this.state.teamCheeses[0][i] = false;
-            this.state.teamCheeses[1][i] = false;
+            newTeamCheeses[0][i] = false;
+            newTeamCheeses[1][i] = false;
         }
+
+
+        this.state = {
+            teams: newTeams,
+            teamCheeses: newTeamCheeses,
+            currentTeam: 0,
+        };
+
         console.log(this.state);
     }
 
@@ -89,10 +95,10 @@ class App extends Component {
             let members = [];
             for (let j = 0; j < this.state.teams[i].length; j++) {
                 if (j + 1 === this.state.teams[i].length) {
-                    members.push(<div className="member"> {this.state.teams[i][j]} </div>);
+                    members.push(<div key={"member " + i + "," + j} className="member"> {this.state.teams[i][j]} </div>);
                 }
                 else {
-                    members.push(<div className="member"> {this.state.teams[i][j]}, </div>);
+                    members.push(<div key={"member " + i + "," + j} className="member"> {this.state.teams[i][j]}, </div>);
 
                 }
             }
@@ -108,9 +114,9 @@ class App extends Component {
             let allCheeses = [];
             for (let j = 0; j < this.colors.length; j++) {
                 //console.log("->", this.state.teamCheeses)
-                allCheeses.push(<div className="cheese" style={{backgroundColor: this.colors[j]}}> {this.state.teamCheeses[i][j] ? "gj" : undefined} </div>);
+                allCheeses.push(<div key={"cheese " + i + "," + j} className="cheese" style={{backgroundColor: this.colors[j]}}> {this.state.teamCheeses[i][j] ? "gj" : undefined} </div>);
             }
-            let cheeseBlock = <div className="cheese-column">{teams[i]} <div className="team-cheese">{allCheeses}</div> </div>;
+            let cheeseBlock = <div key={"cheeseBlock " + i} className="cheese-column">{teams[i]} <div className="team-cheese">{allCheeses}</div> </div>;
             cheeses.push(cheeseBlock);
         }
 
