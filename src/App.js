@@ -29,8 +29,6 @@ class App extends Component {
             teamCheeses: newTeamCheeses,
             currentTeam: 0,
         };
-
-        console.log(this.state);
     }
 
     render() {
@@ -63,7 +61,10 @@ class App extends Component {
                                                                  name={categories[i]}
                                                                  color={this.colors[i]}/>
                 {i + 1 !== categories.length ?
-                    <Question key={i + 1} position={i + 1} name={categories[i + 1]}
+                    <Question key={i + 1}
+                              position={i + 1}
+                              answer={(wasCorrect) => this.updateGroup(i, false, wasCorrect)}
+                              name={categories[i + 1]}
                               color={this.colors[i + 1]}/> : undefined}
             </div>
 

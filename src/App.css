@@ -24,7 +24,7 @@
 }
 
 .questions {
-    width: 75%;
+    width: 60%;
     background-color: lightgrey;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .side-bar {
-    width: 25%;
+    width: 40%;
     border-left: 2px solid black;
 }
 
@@ -53,8 +53,8 @@
 }
 
 .cheese {
-    padding: 20px;
-    margin: 10px 5px;
+    padding: 7%;
+    margin: 1.5% 0.8%;
     border: 2px solid;
 }
 

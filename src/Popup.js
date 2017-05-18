@@ -88,7 +88,7 @@ class Popup extends Component {
     renderOptions(options) {
         let arr = [];
         for (let i = 0; i < options.length; i++) {
-            arr.push(<div className="option">
+            arr.push(<div key={"option " + i} className="option">
                 <div className="option-title">{i+1})</div>
                 <div className="option-answer">{options[i]}</div>
             </div>);
@@ -104,13 +104,13 @@ class Popup extends Component {
     }
 
     getQuestion(position) {
-        position = position % 3; // todo remove
+        position %= 3; // todo remove
         let res = readTextFile()[0];
         return res[position];
     }
 
     getAnswer(position) {
-        position = position % 3; //todo remove
+        position %= 3; //todo remove
         let res = readTextFile()[1];
         return res[position];
     }
