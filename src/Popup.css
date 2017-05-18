@@ -1,0 +1,46 @@
+.popup {
+    position: relative;
+    display: flex;
+    flex-direction:column;
+}
+
+.question-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.question-title {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.answer-section {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.actual-answer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.answer-title {
+    font-weight:bold;
+    margin-bottom: 5px;
+}
+
+.answer {
+    font-size: 20px;
+}
+
+.option {
+    display: flex;
+    flex-direction:row;
+    margin-left: 94px;
+}
+
+.option-title {
+    margin-right: 5px;
+}

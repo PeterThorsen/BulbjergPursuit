@@ -1,0 +1,11 @@
+.block {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 200px;
+    width: 45%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}

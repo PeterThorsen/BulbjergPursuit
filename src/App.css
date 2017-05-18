@@ -1,0 +1,94 @@
+.App {
+    display: flex;
+    flex-direction:column;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    height: 150px;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+
+.main-content {
+    position: relative;
+    display: flex;
+    flex-direction:row;
+}
+
+.questions {
+    width: 75%;
+    background-color: lightgrey;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-bar {
+    width: 25%;
+    border-left: 2px solid black;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cheese {
+    padding: 20px;
+    margin: 10px 5px;
+    border: 2px solid;
+}
+
+.team-cheese {
+    display: flex;
+    flex-direction: row;
+}
+
+.cheese-column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.member {
+    margin-right: 2px;
+}
+
+.team {
+    display: flex;
+    flex-direction: row;
+
+}
+.team-title {
+    margin-right: 5px;
+}
+.team-member-list {
+    display: flex;
+    flex-direction: row;
+
+}
+.team-members {
+
+}
+.team-cheeses {
+    display: flex;
+    flex-direction: column;
+}
