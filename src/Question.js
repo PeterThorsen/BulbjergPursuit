@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Question.css';
 import Popup from './Popup';
+import {getRandomNumber} from './QuestionsAndAnswers.js';
 
 class Question extends Component {
 
@@ -12,7 +13,7 @@ class Question extends Component {
     }
 
     render() {
-        let randomNumber = Math.floor((Math.random() * 20) + 1);
+        let randomNumber = getRandomNumber(this.props.position);
 
         if (this.state.display) {
             return <Popup key={this.props.position}

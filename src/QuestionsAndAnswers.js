@@ -6,7 +6,7 @@ let categories = [];
 let questions = [];
 let answers = [];
 let alreadyRead = false;
-
+let randomNumbers = [];
 export function readTextFile() {
     if(alreadyRead) {
         return [questions, answers];
@@ -53,10 +53,37 @@ export function readTextFile() {
         }
     }
     alreadyRead = true;
+    for(let i = 0; i<categories.length; i++) {
+        randomNumbers.push([]);
+    }
     return [questions, answers];
 }
 
 export function getCategories() {
     readTextFile();
     return categories;
+}
+
+export function getRandomNumber(category) {
+    readTextFile();
+    let usedRandomNumbers = randomNumbers[category];
+    let breakerCounter = 0;
+    while(true) {
+        //let random = Math.floor((Math.random() * questionsInCategories[category].length) + 1);
+        let random = Math.floor((Math.random() * 20) + 1);
+        if(usedRandomNumbers.indexOf(random) === -1) return random;
+
+        /*if(usedRandomNumbers.length == questionsInCategories[category].length) {
+            console.log("NOT ENOUGH QUESTIONS") // TODO
+        }*/
+        breakerCounter++;
+        if(breakerCounter > 10) return -1;
+    }
+
+
+
+}
+
+export function setAnsweredQuestion(category, question) {
+    randomNumbers[category].push(question);
 }

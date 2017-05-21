@@ -7,7 +7,6 @@ import './Popup.css';
 
 class Popup extends Component {
     handleClose(wasCorrect) {
-        // todo give points if true
         this.setState({
             showAnswer: false,
         });
@@ -19,6 +18,7 @@ class Popup extends Component {
         this.state = {
             showAnswer: false,
         };
+        this.handleClose.bind(this);
     }
 
     render() {
