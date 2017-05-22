@@ -40,11 +40,11 @@ class Question extends Component {
         })
     }
 
-    closeQuestion(wasCorrect) {
+    closeQuestion(wasCorrect, questionNumber) {
         this.setState({
             display: false,
         })
-        this.props.answer(wasCorrect);
+        this.props.answer(wasCorrect, questionNumber);
     }
 }
 

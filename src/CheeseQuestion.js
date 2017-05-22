@@ -7,8 +7,6 @@ class CheeseQuestion extends Component {
 
     render() {
         let randomNumber = getRandomNumber(this.props.position);
-        //let randomNumber = Math.floor((Math.random() * 20) + 1);
-        console.log("random", randomNumber);
 
         return <Popup key={this.props.position}
                       name={this.props.name}
@@ -18,8 +16,8 @@ class CheeseQuestion extends Component {
                       question={randomNumber}/>
     }
 
-    closeQuestion(wasCorrect) {
-        this.props.answer(wasCorrect);
+    closeQuestion(wasCorrect, questionNumber) {
+        this.props.answer(wasCorrect, questionNumber);
     }
 }
 

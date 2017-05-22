@@ -6,11 +6,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import './Popup.css';
 
 class Popup extends Component {
-    handleClose(wasCorrect) {
+    handleClose(wasCorrect, question) {
+
         this.setState({
             showAnswer: false,
         });
-        this.props.closeQuestion(wasCorrect);
+        this.props.closeQuestion(wasCorrect, question);
     };
 
     constructor(props) {
@@ -26,11 +27,11 @@ class Popup extends Component {
         if (this.state.showAnswer) actions.push(<FlatButton
             label="Forkert"
             primary={true}
-            onTouchTap={this.handleClose.bind(this, false)}
+            onTouchTap={this.handleClose.bind(this, false, this.props.question)}
         />, <FlatButton
             label="Korrekt"
             primary={true}
-            onTouchTap={this.handleClose.bind(this, true)}
+            onTouchTap={this.handleClose.bind(this, true, this.props.question)}
         />);
 
         return (
@@ -50,16 +51,19 @@ class Popup extends Component {
     }
 
     renderPopupContent() {
-        let question = this.getQuestion(this.props.question)[0];
-        let split = question.split("?");
-        question = split[0].trim() + "?";
-
+        let question;
         let options = null;
-        if (split[1]) {
-            options = [];
-            split = split[1].split(",");
-            for (let i = 0; i < split.length; i++) {
-                options.push(split[i].trim());
+        if(this.props.display) {
+            question = this.getQuestion(this.props.position, this.props.question);
+            let split = question.split("?");
+            question = split[0].trim() + "?";
+            split[1] = split[1].trim();
+            if (split[1]) {
+                options = [];
+                split = split[1].split(",");
+                for (let i = 0; i < split.length; i++) {
+                    options.push(split[i].trim());
+                }
             }
         }
         return <div className="popup-content">
@@ -71,7 +75,7 @@ class Popup extends Component {
             <div className="answer-section">
                 {this.state.showAnswer ? <div className="actual-answer-section">
                     <div className="answer-title">Svar:</div>
-                    <div className="answer">{this.getAnswer(this.props.question)}</div>
+                    <div className="answer">{this.getAnswer(this.props.position, this.props.question)}</div>
                 </div>
                     : this.renderHiddenZone()}
             </div>
@@ -103,15 +107,13 @@ class Popup extends Component {
         })
     }
 
-    getQuestion(position) {
-        position %= 3; // todo remove
-        let res = readTextFile()[0];
+    getQuestion(category, position) {
+        let res = readTextFile()[0][category];
         return res[position];
     }
 
-    getAnswer(position) {
-        position %= 3; //todo remove
-        let res = readTextFile()[1];
+    getAnswer(category, position) {
+        let res = readTextFile()[1][category];
         return res[position];
     }
 }

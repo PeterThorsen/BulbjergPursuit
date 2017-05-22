@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Question from './Question';
 import CheeseQuestion from './CheeseQuestion';
-import {getCategories} from './QuestionsAndAnswers.js';
+import {getCategories, setAnsweredQuestion} from './QuestionsAndAnswers.js';
 
 class App extends Component {
 
@@ -48,7 +48,7 @@ class App extends Component {
                         <CheeseQuestion key={"CheeseQuestion " + this.state.openCheeseQuestion}
                                         position={this.state.openCheeseQuestion}
                                         name={"Cheese: " + getCategories()[this.state.openCheeseQuestion]}
-                                        answer={(wasCorrect) => this.updateGroup(this.state.openCheeseQuestion, true, wasCorrect)}/>
+                                        answer={(wasCorrect, questionNumber) => this.updateGroup(this.state.openCheeseQuestion, true, wasCorrect, questionNumber)}/>
                         : undefined}
 
 
@@ -64,15 +64,16 @@ class App extends Component {
         let arr = [];
         let categories = getCategories();
         for (let i = 0; i < categories.length; i++) {
-            let section = <div key={i} className="row"><Question key={i}
-                                                                 position={i}
-                                                                 answer={(wasCorrect) => this.updateGroup(i, false, wasCorrect)}
-                                                                 name={categories[i]}
-                                                                 color={this.colors[i]}/>
+            let holderI = i;
+            let section = <div key={i} className="row"><Question key={holderI}
+                                                                 position={holderI}
+                                                                 answer={(wasCorrect, questionNumber) => this.updateGroup(holderI, false, wasCorrect, questionNumber)}
+                                                                 name={categories[holderI]}
+                                                                 color={this.colors[holderI]}/>
                 {i + 1 !== categories.length ?
                     <Question key={i + 1}
                               position={i + 1}
-                              answer={(wasCorrect) => this.updateGroup(i + 1, false, wasCorrect)}
+                              answer={(wasCorrect, questionNumber) => this.updateGroup(i + 1, false, wasCorrect, questionNumber)}
                               name={categories[i + 1]}
                               color={this.colors[i + 1]}/> : undefined}
             </div>
@@ -84,10 +85,14 @@ class App extends Component {
         return <div className="column"> {arr} </div>;
     }
 
-    updateGroup(questionType, isCheese, wasCorrect) {
+    updateGroup(questionType, isCheese, wasCorrect, questionNumber) {
         this.setState({
             openCheeseQuestion: -1
         });
+
+        if(wasCorrect) {
+            setAnsweredQuestion(questionType, questionNumber)
+        }
         if (isCheese && wasCorrect) {
             let newCheeses = this.state.teamCheeses;
             newCheeses[this.state.currentTeam][questionType] = wasCorrect;
@@ -95,7 +100,8 @@ class App extends Component {
                 teamCheeses: newCheeses
             })
         }
-        else if (!wasCorrect) {
+
+    else if (!wasCorrect) {
             let newTeam = this.state.currentTeam;
             newTeam++;
             newTeam %= this.state.teams.length+1;
@@ -133,9 +139,12 @@ class App extends Component {
         for (let i = 0; i < this.state.teams.length; i++) {
             let allCheeses = [];
             for (let j = 0; j < this.colors.length; j++) {
+                let style = {};
+                style.backgroundColor = this.colors[j];
+                style.opacity = this.state.currentTeam === i ? 1.0 : 0.4;
                 allCheeses.push(<div key={"cheese " + i + "," + j} className="cheese"
-                                     onClick={this.renderCheeseQuestion.bind(this, j)}
-                                     style={{backgroundColor: this.colors[j]}}> {this.state.teamCheeses[i][j] ? "√" : undefined} </div>);
+                                     onClick={this.renderCheeseQuestion.bind(this, j, i)}
+                                     style={style}> {this.state.teamCheeses[i][j] ? "√" : undefined} </div>);
             }
             let cheeseBlock = <div key={"cheeseBlock " + i} className="cheese-column">{teams[i]}
                 <div className="team-cheese">{allCheeses}</div>
@@ -151,7 +160,8 @@ class App extends Component {
         </div>
     }
 
-    renderCheeseQuestion(question) {
+    renderCheeseQuestion(question, team) {
+        if(team !== this.state.currentTeam) return;
         this.setState({
             openCheeseQuestion: question
         })
