@@ -9,17 +9,15 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        let team1 = ["Liss"];
-        let team2 = ["Marian"];
-        let newTeams = [];
-        newTeams.push(team1);
-        newTeams.push(team2);
+        let newTeams = props.teams;
         let newTeamCheeses = [];
-        newTeamCheeses.push([]);
-        newTeamCheeses.push([]);
+        for(let i = 0; i<newTeams.length; i++) {
+            newTeamCheeses.push([]);
+        }
         for (let i = 0; i < 6; i++) {
-            newTeamCheeses[0][i] = false;
-            newTeamCheeses[1][i] = false;
+            for(let j = 0; j<newTeamCheeses.length; j++) {
+                newTeamCheeses[j][i] = false;
+            }
         }
 
 
@@ -29,6 +27,10 @@ class App extends Component {
             currentTeam: 0,
             openCheeseQuestion: -1,
         };
+
+        /*window.onbeforeunload = function() {
+            return true;
+        };*/
     }
 
     render() {
