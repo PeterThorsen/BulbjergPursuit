@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Question from './Question';
 import CheeseQuestion from './CheeseQuestion';
@@ -36,7 +35,6 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
                     <h2>Bulbjerg Pursuit</h2>
                 </div>
                 <div className="main-content">
