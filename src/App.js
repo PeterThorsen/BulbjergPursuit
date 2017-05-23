@@ -11,11 +11,11 @@ class App extends Component {
 
         let newTeams = props.teams;
         let newTeamCheeses = [];
-        for(let i = 0; i<newTeams.length; i++) {
+        for (let i = 0; i < newTeams.length; i++) {
             newTeamCheeses.push([]);
         }
         for (let i = 0; i < 6; i++) {
-            for(let j = 0; j<newTeamCheeses.length; j++) {
+            for (let j = 0; j < newTeamCheeses.length; j++) {
                 newTeamCheeses[j][i] = false;
             }
         }
@@ -29,8 +29,8 @@ class App extends Component {
         };
 
         /*window.onbeforeunload = function() {
-            return true;
-        };*/
+         return true;
+         };*/
     }
 
     render() {
@@ -89,10 +89,8 @@ class App extends Component {
         this.setState({
             openCheeseQuestion: -1
         });
+        setAnsweredQuestion(questionType, questionNumber)
 
-        if(wasCorrect) {
-            setAnsweredQuestion(questionType, questionNumber)
-        }
         if (isCheese && wasCorrect) {
             let newCheeses = this.state.teamCheeses;
             newCheeses[this.state.currentTeam][questionType] = wasCorrect;
@@ -101,10 +99,10 @@ class App extends Component {
             })
         }
 
-    else if (!wasCorrect) {
+        else if (!wasCorrect) {
             let newTeam = this.state.currentTeam;
             newTeam++;
-            newTeam %= this.state.teams.length+1;
+            newTeam %= this.state.teams.length + 1;
             this.setState({
                 currentTeam: newTeam,
             });
@@ -161,7 +159,7 @@ class App extends Component {
     }
 
     renderCheeseQuestion(question, team) {
-        if(team !== this.state.currentTeam) return;
+        if (team !== this.state.currentTeam) return;
         this.setState({
             openCheeseQuestion: question
         })
