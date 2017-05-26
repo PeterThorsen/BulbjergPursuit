@@ -54,7 +54,7 @@ class Question extends Component {
         }
         let content = [];
         for(let i = 0; i<innerContent.length; i++) {
-            content.push(<div className="login-row">
+            content.push(<div key={"login-row " + i} className="login-row">
                 {innerContent[i]}
                 <FloatingActionButton mini={true}
                                       style={{boxShadow: 'none'}}

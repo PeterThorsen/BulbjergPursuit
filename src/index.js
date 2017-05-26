@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import LoginView from './LoginView';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,7 +9,6 @@ injectTapEventPlugin();
 const ThemeApp = () => (
     <MuiThemeProvider>
         <LoginView />
-        {/*<App />*/}
     </MuiThemeProvider>
 );
 ReactDOM.render(

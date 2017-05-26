@@ -34,6 +34,7 @@ class App extends Component {
     }
 
     render() {
+        window.state = this.state;
         return (
             <div className="App">
                 <div className="App-header">
@@ -71,15 +72,15 @@ class App extends Component {
                                                                  name={categories[holderI]}
                                                                  color={this.colors[holderI]}/>
                 {i + 1 !== categories.length ?
-                    <Question key={i + 1}
-                              position={i + 1}
-                              answer={(wasCorrect, questionNumber) => this.updateGroup(i + 1, false, wasCorrect, questionNumber)}
-                              name={categories[i + 1]}
-                              color={this.colors[i + 1]}/> : undefined}
+                    <Question key={holderI + 1}
+                              position={holderI + 1}
+                              answer={(wasCorrect, questionNumber) => this.updateGroup(holderI+1, false, wasCorrect, questionNumber)}
+                              name={categories[holderI + 1]}
+                              color={this.colors[holderI + 1]}/> : undefined}
             </div>
 
             arr.push(section);
-            if (i + 1 !== categories.length) i++;
+            if (holderI + 1 !== categories.length) i++;
         }
 
         return <div className="column"> {arr} </div>;
@@ -102,7 +103,7 @@ class App extends Component {
         else if (!wasCorrect) {
             let newTeam = this.state.currentTeam;
             newTeam++;
-            newTeam %= this.state.teams.length + 1;
+            newTeam %= this.state.teams.length;
             this.setState({
                 currentTeam: newTeam,
             });
@@ -127,7 +128,7 @@ class App extends Component {
                 }
             }
             let team = <div className="team">
-                <div className="team-title">Hold {i}:</div>
+                <div className="team-title">Hold {i+1}:</div>
                 <div className="team-member-list">{members}</div>
             </div>;
             teams.push(team);

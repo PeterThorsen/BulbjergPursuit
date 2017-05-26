@@ -287,6 +287,7 @@ export function getRandomNumber(category) {
 
 export function setAnsweredQuestion(category, question) {
     let newAnswered = answeredQuestions;
+    console.log(newAnswered, category, "<--")
     newAnswered[category].push(question);
     answeredQuestions = newAnswered;
 }
