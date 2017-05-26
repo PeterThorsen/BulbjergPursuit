@@ -28,9 +28,9 @@ class App extends Component {
             openCheeseQuestion: -1,
         };
 
-        /*window.onbeforeunload = function() {
+        window.onbeforeunload = function() {
          return true;
-         };*/
+         };
     }
 
     render() {
