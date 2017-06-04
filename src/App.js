@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Question from './Question';
 import CheeseQuestion from './CheeseQuestion';
-import {getCategories, setAnsweredQuestion} from './QuestionsAndAnswers.js';
+import {getCategories, setAnsweredQuestion, getAllAnswers} from './QuestionsAndAnswers.js';
 
 class App extends Component {
 
@@ -28,12 +28,33 @@ class App extends Component {
             openCheeseQuestion: -1,
         };
 
-        window.onbeforeunload = function() {
-         return true;
-         };
+        window.onbeforeunload = function () {
+            return true;
+        };
     }
 
     render() {
+
+        for (let i = 0; i < this.state.teamCheeses.length; i++) {
+            let counter = 0;
+            for (let j = 0; j < this.state.teamCheeses[i].length; j++) {
+                if (this.state.teamCheeses[i][j] == true) {
+                    counter++;
+                }
+            }
+            if(counter === 6) {
+                let allAnswers = getAllAnswers();
+                let list = [];
+                for(let k = 0; k<allAnswers.length; k++) {
+                    for(let a = 0; a<allAnswers[k].length; a++) {
+                        list.push("| ", k, ": ", allAnswers[k][a] + " |\n")
+                    }
+                }
+                alert("Tillykke med sejren!");
+                return <div>{list}</div>
+            }
+        }
+
         window.state = this.state;
         return (
             <div className="App">
@@ -74,7 +95,7 @@ class App extends Component {
                 {i + 1 !== categories.length ?
                     <Question key={holderI + 1}
                               position={holderI + 1}
-                              answer={(wasCorrect, questionNumber) => this.updateGroup(holderI+1, false, wasCorrect, questionNumber)}
+                              answer={(wasCorrect, questionNumber) => this.updateGroup(holderI + 1, false, wasCorrect, questionNumber)}
                               name={categories[holderI + 1]}
                               color={this.colors[holderI + 1]}/> : undefined}
             </div>
@@ -128,7 +149,7 @@ class App extends Component {
                 }
             }
             let team = <div className="team">
-                <div className="team-title">Hold {i+1}:</div>
+                <div className="team-title">Hold {i + 1}:</div>
                 <div className="team-member-list">{members}</div>
             </div>;
             teams.push(team);
